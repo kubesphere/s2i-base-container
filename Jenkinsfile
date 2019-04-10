@@ -49,9 +49,9 @@ make build TARGET=centos7 VERSIONS=base'''
         branch 'master'
       }
       steps{
-         build '../s2i-java/master'
-         build '../s2i-python/master'
-         build '../s2i-nodejs/master'
+         build '../s2i-java/master', wait: false
+         build '../s2i-python/master', wait: false
+         build '../s2i-nodejs/master', wait: false
       }
     }
   }
