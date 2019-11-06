@@ -40,6 +40,7 @@ make build TARGET=centos7 VERSIONS=base'''
           withCredentials([usernamePassword(passwordVariable : 'DOCKER_PASSWORD' ,usernameVariable : 'DOCKER_USERNAME' ,credentialsId : "$DOCKERHUB_CREDENTIAL_ID" ,)]) {
             sh 'echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin'
           }
+          sh 'docker tag kubespheredev/s2i-base-centos7 kubespheredev/s2i-base-centos7:2.1'
           sh 'docker push kubespheredev/s2i-base-centos7'
         }
       }
