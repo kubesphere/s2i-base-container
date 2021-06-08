@@ -1,5 +1,5 @@
 # This image is the base image for all KubeSphere v3 language container images.
-FROM centos/s2i-core-centos7
+FROM kubespheredev/s2i-core-centos7:master
 
 ENV SUMMARY="Base image with essential libraries and tools used as a base for \
 builder images like perl, python, ruby, etc." \
