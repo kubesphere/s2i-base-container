@@ -92,6 +92,8 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
+        with:
+          submodules: true
       - name: Docker meta for kubesphere
         id: meta
         if: github.repository_owner == 'kubesphere'
@@ -144,8 +146,8 @@ jobs:
         uses: docker/build-push-action@v3.2.0
         if: github.repository_owner == 'kubesphere'
         with:
-          context: core
-          file: Dockerfile.rhel8
+          context: .
+          file: core/Dockerfile.rhel8
           tags: ${{ steps.meta.outputs.tags }}
           push: ${{ github.event_name != 'pull_request' }}
           labels: ${{ steps.meta.outputs.labels }}
@@ -154,8 +156,8 @@ jobs:
         uses: docker/build-push-action@v3.2.0
         if: github.repository_owner != 'kubesphere'
         with:
-          context: core
-          file: Dockerfile.rhel8
+          context: .
+          file: core/Dockerfile.rhel8
           tags: ${{ steps.metaContributors.outputs.tags }}
           push: ${{ github.event_name != 'pull_request' }}
           labels: ${{ steps.metaContributors.outputs.labels }}
@@ -166,6 +168,8 @@ jobs:
     needs: BuildCoreCentos7
     steps:
     - uses: actions/checkout@v2
+      with:
+        submodules: true
     - name: Docker meta for kubesphere
       id: meta
       if: github.repository_owner == 'kubesphere'
@@ -218,8 +222,8 @@ jobs:
       uses: docker/build-push-action@v3.2.0
       if: github.repository_owner == 'kubesphere'
       with:
-        context: base
-        file: Dockerfile.centos7
+        context: .
+        file: base/Dockerfile.centos7
         tags: ${{ steps.meta.outputs.tags }}
         push: ${{ github.event_name != 'pull_request' }}
         labels: ${{ steps.meta.outputs.labels }}
@@ -228,8 +232,8 @@ jobs:
       uses: docker/build-push-action@v3.2.0
       if: github.repository_owner != 'kubesphere'
       with:
-        context: base
-        file: Dockerfile.centos7
+        context: .
+        file: base/Dockerfile.centos7
         tags: ${{ steps.metaContributors.outputs.tags }}
         push: ${{ github.event_name != 'pull_request' }}
         labels: ${{ steps.metaContributors.outputs.labels }}
@@ -240,6 +244,8 @@ jobs:
     needs: BuildCoreRhel8
     steps:
       - uses: actions/checkout@v2
+        with:
+          submodules: true
       - name: Docker meta for kubesphere
         id: meta
         if: github.repository_owner == 'kubesphere'
@@ -292,8 +298,8 @@ jobs:
         uses: docker/build-push-action@v3.2.0
         if: github.repository_owner == 'kubesphere'
         with:
-          context: base
-          file: Dockerfile.rhel8
+          context: .
+          file: base/Dockerfile.rhel8
           tags: ${{ steps.meta.outputs.tags }}
           push: ${{ github.event_name != 'pull_request' }}
           labels: ${{ steps.meta.outputs.labels }}
@@ -302,8 +308,8 @@ jobs:
         uses: docker/build-push-action@v3.2.0
         if: github.repository_owner != 'kubesphere'
         with:
-          context: base
-          file: Dockerfile.rhel8
+          context: .
+          file: base/Dockerfile.rhel8
           tags: ${{ steps.metaContributors.outputs.tags }}
           push: ${{ github.event_name != 'pull_request' }}
           labels: ${{ steps.metaContributors.outputs.labels }}
