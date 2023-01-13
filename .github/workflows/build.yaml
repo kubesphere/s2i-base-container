@@ -69,8 +69,8 @@ jobs:
       uses: docker/build-push-action@v3.2.0
       if: github.repository_owner == 'kubesphere'
       with:
-        context: core
-        file: Dockerfile.centos7
+        context: .
+        file: core/Dockerfile.centos7
         tags: ${{ steps.meta.outputs.tags }}
         push: ${{ github.event_name != 'pull_request' }}
         labels: ${{ steps.meta.outputs.labels }}
@@ -79,7 +79,7 @@ jobs:
       uses: docker/build-push-action@v3.2.0
       if: github.repository_owner != 'kubesphere'
       with:
-        context: core
+        context: .
         file: core/Dockerfile.centos7
         tags: ${{ steps.metaContributors.outputs.tags }}
         push: ${{ github.event_name != 'pull_request' }}
