@@ -1,14 +1,14 @@
-OpenShift base images (core variant)
+kubesphere base images (core variant)
 ========================================
 
 This repository contains Dockerfiles for images which can be used as base images
-to add support for [source-to-image](https://github.com/openshift/source-to-image)
+to add support for [source-to-image](https://github.com/kubesphere/source-to-image)
 without installing several development libraries.
 
 
 Description
 --------------------------------
-OpenShift S2I images use [Software Collections](https://www.softwarecollections.org/en/)
+kubesphere S2I images use [Software Collections](https://www.softwarecollections.org/en/)
 packages to provide the latest versions of various software.
 The SCL packages are released more frequently than the RHEL or CentOS systems,
 which are unlikely to change for several years.
@@ -17,7 +17,7 @@ because those are stable, supported, and secure platforms.
 
 Normally, SCL requires manual operation to enable the collection you want to use.
 This is burdensome and can be prone to error.
-The OpenShift S2I approach is to set Bash environment variables that
+The kubesphere S2I approach is to set Bash environment variables that
 serve to automatically enable the desired collection:
 
 * `BASH_ENV`: enables the collection for all non-interactive Bash sessions

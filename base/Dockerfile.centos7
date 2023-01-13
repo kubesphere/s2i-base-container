@@ -1,5 +1,5 @@
-# This image is the base image for all OpenShift v3 language container images.
-FROM zhbinary/s2i-core-centos7
+# This image is the base image for all kubesphere v3 language container images.
+FROM ghcr.io/kubesphere/s2i-core-rhel8
 
 ENV SUMMARY="Base image with essential libraries and tools used as a base for \
 builder images like perl, python, ruby, etc." \
