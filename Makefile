@@ -1,6 +1,7 @@
 # Variables are documented in common/build.sh.
 BASE_IMAGE_NAME = s2i
 VERSIONS = core base
+DOCKER_BUILD_CONTEXT = ..
 
 # HACK:  Ensure that 'git pull' for old clones doesn't cause confusion.
 # New clones should use '--recursive'.
@@ -12,7 +13,6 @@ include common/common.mk
 # We cannot just depend on tag here since tag depends on build
 base: core
 	VERSIONS="base" $(script_env) $(build)
-	VERSIONS="base" $(script_env) $(tag)
 
 core: core/root/help.1
 	VERSIONS="core" $(script_env) $(build)
