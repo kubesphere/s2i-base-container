@@ -161,7 +161,7 @@ jobs:
 
   BuildBaseCentos7:
     runs-on: ubuntu-20.04
-    needs: BuildCore
+    needs: BuildCoreCentos7
     steps:
     - uses: actions/checkout@v2
     - name: Docker meta for kubesphere
@@ -235,7 +235,7 @@ jobs:
 
   BuildBaseRhel8:
     runs-on: ubuntu-20.04
-    needs: BuildCore
+    needs: BuildCoreRhel8
     steps:
       - uses: actions/checkout@v2
       - name: Docker meta for kubesphere
