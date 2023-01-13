@@ -1,5 +1,5 @@
-# This image is the base image for all KubeSphere v3 language container images.
-FROM kubespheredev/s2i-core-fedora:latest
+# This image is the base image for all OpenShift v3 language container images.
+FROM zhbinary/s2i-core-centos7
 
 ENV SUMMARY="Base image with essential libraries and tools used as a base for \
 builder images like perl, python, ruby, etc." \
@@ -7,22 +7,21 @@ builder images like perl, python, ruby, etc." \
 images layered on top of it with all the tools needed to use source-to-image \
 functionality. Additionally, s2i-base also contains various libraries needed for \
 it to serve as a base for other builder images, like s2i-python or s2i-ruby." \
-    NAME=s2i-base \
-    VERSION=1 \
-    ARCH=x86_64
+    NODEJS_SCL=rh-nodejs14
 
 LABEL summary="$SUMMARY" \
       description="$DESCRIPTION" \
       io.k8s.description="$DESCRIPTION" \
       io.k8s.display-name="s2i base" \
-      com.yunify.component="$NAME" \
-      name="kubespheredev/s2i-base-fedora28" \
+      com.yunify.component="s2i-base-container" \
+      name="kubespheredev/s2i-base-centos7" \
       version="1" \
       maintainer="kubesphere.io <kubesphere@yunify.com>"
 
 # This is the list of basic dependencies that all language container image can
 # consume.
-RUN INSTALL_PKGS="autoconf \
+RUN yum install -y centos-release-scl && \
+  INSTALL_PKGS="autoconf \
   automake \
   bzip2 \
   gcc-c++ \
@@ -34,17 +33,18 @@ RUN INSTALL_PKGS="autoconf \
   libxslt-devel \
   lsof \
   make \
-  mariadb-connector-c-devel \
-  npm \
+  mariadb-devel \
+  mariadb-libs \
   openssl-devel \
   patch \
   postgresql-devel \
   procps-ng \
+  ${NODEJS_SCL}-npm \
   sqlite-devel \
   unzip \
   wget \
   which \
   zlib-devel" && \
-  dnf install -y --setopt=tsflags=nodocs $INSTALL_PKGS && \
+  yum install -y --setopt=tsflags=nodocs $INSTALL_PKGS && \
   rpm -V $INSTALL_PKGS && \
-  dnf clean all -y
+  yum -y clean all --enablerepo='*'
